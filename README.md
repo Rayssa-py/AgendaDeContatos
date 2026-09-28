@@ -18,70 +18,53 @@ Construir uma Agenda de Contatos completa, iniciando com uma solução procedura
 | **`v0.1.0`** | Arrays | Permite **vários** contatos com capacidade fixa | Concluído |
 | **`v0.2.0`** | List + ArrayList | Permite **vários** contatos com tamanho dinâmico | Concluído |
 | **`v0.3.0`** | List + ArrayList | Adiciona a opção de **alteração** de contatos | Concluído |
-| **`v1.0.0`** | List + ArrayList | **Modularização** das funcionalidades com métodos | **Versão Atual** |
+| **`v1.0.0`** | List + ArrayList | Modularização das funcionalidades com métodos | Concluído |
+| **`v1.1.0`** | List + ArrayList | Modularização em arquivos separados (`Uteis` e `Agenda`) | **Versão Atual** |
 
 ---
 
-## 📌 Versão Atual: `v1.0.0` — Modularização das Funcionalidades
+## 📌 Versão Atual: `v1.1.0` — Modularização em Arquivos Separados
 
-Nesta versão, a Agenda de Contatos passou por um processo de **refatoração**, onde o código procedural contido na classe principal foi organizado e dividido em **métodos**, melhorando a legibilidade e a manutenção do sistema.
+Nesta versão, a Agenda de Contatos passou por uma nova etapa de organização estrutural: as rotinas e funções foram divididas em arquivos/classes distintas (`Uteis` e `Agenda`), promovendo a **separação de responsabilidades**.
 
-> 💡 **Nota:** A versão `v1.0.0` mantém todas as funcionalidades da `v0.3.0`, alterando principalmente a estrutura e organização interna do código.
+### 💡 Principais Alterações e Conceitos
 
-### ⚙️ Principais Alterações
-* 🧩 **Modularização:** Divisão da aplicação em rotinas reutilizáveis
-* 🛠️ **Criação de Métodos Específicos:**
-  * `adicionar()` — Inserção de novos dados
-  * `listar()` — Exibição dos contatos cadastrados
-  * `pesquisar()` — Busca sequencial de registros
-  * `atualizar()` — Alteração dos dados existentes
-  * `excluir()` — Remoção de contatos
-* 🔀 **Simplificação do Menu:** O bloco `switch-case` no método `main()` passa apenas a delegar as chamadas aos métodos correspondentes
-* 📤 **Passagem de Parâmetros:** Compartilhamento seguro das listas entre os métodos
-
-### 💾 Armazenamento
-Os dados permanecem em memória utilizando três listas paralelas do tipo `List<String>`:
-* `nomes`
-* `celulares`
-* `e-mails`
-
-### 💡 Conceitos Trabalhados
-* Métodos, Parâmetros e Argumentos
-* Retorno de funções e tipo `void`
-* Escopo e tempo de vida de variáveis
-* Modularização e Refatoração de Código
+* 📁 **Divisão em Arquivos:** Organização do código em múltiplos arquivos para facilitar a leitura e a manutenção
+* 🛠️ **Módulo `Uteis`:** Centralização de rotinas auxiliares (ex: entrada de dados, exibições genéricas e validações)
+* 📖 **Módulo `Agenda`:** Centralização das regras de negócio e manipulação dos dados dos contatos (`adicionar`, `listar`, `pesquisar`, `atualizar`, `excluir`)
+* 🚀 **Classe `Principal`:** Responsável apenas pelo ponto de entrada da aplicação (`main`) e inicialização do menu
+* 📦 **Encapsulamento Inicial:** Início do isolamento de funções por domínio/responsabilidade
 
 ---
 
 ## 📜 Histórico de Versões
 
+### 📍 `v1.0.0` — Modularização das Funcionalidades
+* Organização do código procedural através da criação de métodos
+* Implementação dos métodos `adicionar()`, `listar()`, `pesquisar()`, `atualizar()` e `excluir()`
+* Simplificação da estrutura `switch-case` e uso de parâmetros para compartilhamento de dados
+
 ### 📍 `v0.3.0` — Alteração de Contatos
 * Implementação da funcionalidade de **Alterar contato**
-* Atualização dos dados nas coleções utilizando o método `.set()`
-* Reutilização da lógica de validação e busca para localização precisa dos registros
+* Atualização de registros utilizando o método `.set()` do `ArrayList`
 
 ### 📍 `v0.2.0` — Armazenamento Dinâmico com ArrayList
 * Introdução da API de Coleções (`List` e `ArrayList`)
-* Uso de Generics (`<String>`) e alocação dinâmica de memória
-* Manipulação com métodos nativos (`add`, `get`, `remove`, `size`, `indexOf`)
-* Iteração simplificada com `for-each`
+* Uso de Generics (`<String>`) e manipulação com métodos nativos da API
 
 ### 📍 `v0.1.0` — Arrays e Capacidade Fixa
 * Gerenciamento de múltiplos contatos via vetores simples (`String[]`)
-* Controle de capacidade máxima pré-definida
-* Manipulação manual de posições, índices e laço `for`
-* Reorganização física do array na remoção de elementos
+* Controle de capacidade pré-definida e reorganização física de elementos na remoção
 
 ### 📍 `v0.0.0` — Programação Procedural Básica
-* Aplicação em classe única (`Principal`) e todo o código no método `main()`
-* Armazenamento temporário de apenas **um contato** via variáveis simples (`nome`, `celular`, `email`)
-* Menu via console utilizando `Scanner`, `if-else`, `switch-case` e `while`
+* Estrutura básica em classe única (`Principal`)
+* Armazenamento temporário de apenas **um contato** via variáveis simples
 
 ---
 
 ## 🗺️ Próximas Versões
 
-- [ ] **`v1.1.0+` / `v2.0.0`** — Introdução da Programação Orientada a Objetos (Classes, Objetos, Atributos e Métodos), Encapsulamento, Padrões DAO e MVC, Interface Gráfica (Swing), JDBC e Banco de Dados.
+- [ ] **`v2.0.0+`** — Introdução da Programação Orientada a Objetos (Classes, Objetos, Atributos e Métodos), Encapsulamento, Padrões DAO e MVC, Interface Gráfica (Swing), JDBC e Banco de Dados.
 
 ---
 
@@ -96,5 +79,6 @@ As versões estáveis do projeto são identificadas por **tags Git**:
   - v0.2.0 -> Armazenamento com List / ArrayList (Tamanho dinâmico)
   - v0.3.0 -> Edição de contatos
 
-- V1 (Modularização do código)
-  - v1.0.0 -> Organização do código procedural em Métodos
+- V1 (Modularização e Organização)
+  - v1.0.0 -> Organização procedural em métodos
+  - v1.1.0 -> Divisão das funcionalidades em arquivos separados (Uteis e Agenda)
