@@ -12,37 +12,57 @@ Construir uma Agenda de Contatos completa, iniciando com uma solução procedura
 
 ## 📊 Evolução do Projeto
 
-| Versão | Armazenamento | Descrição |
-| :--- | :--- | :--- |
-| **`v0.0.0`** | Variáveis simples | Permite armazenar apenas **um** contato |
-| **`v0.1.0`** | Arrays | Permite **vários** contatos com capacidade fixa *(Atual)* |
-| **`v0.2.0`** | List + ArrayList | Permitirá vários contatos com tamanho dinâmico |
+| Versão | Armazenamento | Descrição | Status |
+| :--- | :--- | :--- | :---: |
+| **`v0.0.0`** | Variáveis simples | Permite armazenar apenas **um** contato | Concluído |
+| **`v0.1.0`** | Arrays | Permite **vários** contatos com capacidade fixa | Concluído |
+| **`v0.2.0`** | List + ArrayList | Permite **vários** contatos com tamanho dinâmico | **Versão Atual** |
 
 ---
 
-## 📌 Versão Atual: `v0.1.0`
+## 📌 Versão Atual: `v0.2.0` — Coleções Dinâmicas
 
-Nesta versão, a Agenda de Contatos evoluiu para utilizar **arrays**, possibilitando o armazenamento e o gerenciamento de múltiplos contatos no sistema.
+Nesta versão, a Agenda de Contatos evoluiu para utilizar a API de Coleções do Java (`List` e `ArrayList`), permitindo o armazenamento e gerenciamento dinâmico de contatos sem a necessidade de limitar previamente a capacidade máxima.
 
 ### 💡 Principais Conceitos Trabalhados
-* 🧮 **Arrays & Índices:** Manipulação e acesso a posições de memória
-* 🔁 **Estrutura `for`:** Varredura e iteração sobre os contatos
-* 📏 **Capacidade Fixa:** Controle da quantidade de elementos vs. limite máximo do vetor
-* 🔍 **Pesquisa:** Busca estruturada de contatos cadastrados
-* 🔄 **Exclusão e Reorganização:** Remoção de elementos mantendo a integridade dos dados no array
+
+* 📦 **Interface `List` & Classe `ArrayList`:** Manipulação de coleções dinâmicas de dados
+* 🏷️ **Generics (`<String>`):** Tipo seguro para garantir que a lista armazene apenas o tipo esperado
+* 📈 **Redimensionamento Dinâmico:** Alocação automática de memória conforme novos contatos são inseridos
+* 🛠️ **Métodos da API:**
+  * `add()` — Inserção de novos elementos
+  * `get()` — Acesso a um elemento específico pelo índice
+  * `remove()` — Remoção simples de contatos
+  * `size()` — Retorno da quantidade atual de elementos
+  * `indexOf()` — Localização de elementos
+* 🔁 **Iteração com `for-each`:** Leitura e varredura simplificada e mais legível da coleção
+* ⚡ **Simplificação de Código:** Operações de busca, exclusão e reorganização automatizadas pela própria API
 
 ---
 
 ## 📜 Histórico de Versões
+
+### 📍 `v0.1.0` — Arrays e Capacidade Fixa
+
+Segunda versão da Agenda, introduzindo o gerenciamento de múltiplos registros via vetores.
+
+* **Características Principais:**
+  * Uso de arrays simples (`String[]`) para cada atributo (`nome`, `celular`, `email`)
+  * Controle de capacidade máxima pré-definida
+  * Manipulação de posições através de índices e estrutura `for`
+  * Pesquisa sequencial para localizar contatos
+  * Remoção de elementos com reorganização física do array (deslocamento dos itens subsequentes)
+
+---
 
 ### 📍 `v0.0.0` — Programação Procedural Básica
 
 Primeira versão da aplicação, focada nos fundamentos da linguagem Java.
 
 * **Características Principais:**
-  * Classe única (`Principal`) com todo o código contido no método `main()`
-  * Armazenamento temporário de apenas **um contato** por variáveis simples (`nome`, `celular`, `email`)
-  * Um novo cadastro substitui o contato armazenado anteriormente
+  * Classe única (`Principal`) com todo o código dentro do método `main()`
+  * Armazenamento temporário de apenas **um contato** (um novo cadastro substitui o anterior)
+  * Variáveis simples: `nome`, `celular` e `email`
 
 * **Recursos Utilizados:**
   * Menu interativo via console
@@ -60,8 +80,7 @@ Primeira versão da aplicação, focada nos fundamentos da linguagem Java.
 
 ## 🗺️ Próximas Versões
 
-- [ ] **`v0.2.0`** — Armazenamento dinâmico com `List` e `ArrayList`
-- [ ] **Versões Posteriores** — Modularização, Classes, Encapsulamento, DAO, MVC, Interface Gráfica (Swing), JDBC e Banco de Dados.
+- [ ] **`v0.3.0+`** — Modularização, introdução de Classes e Objetos, Encapsulamento, Padrões DAO e MVC, Interface Gráfica (Swing), JDBC e Banco de Dados.
 
 ---
 
@@ -71,5 +90,5 @@ As versões estáveis do projeto são identificadas por **tags Git**:
 
 ```text
 v0.0.0  -> Programação Procedural Básica (1 contato)
-v0.1.0  -> Armazenamento com Arrays (Vários contatos, capacidade fixa)
+v0.1.0  -> Armazenamento com Arrays (Capacidade fixa)
 v0.2.0  -> Armazenamento com List / ArrayList (Tamanho dinâmico)
