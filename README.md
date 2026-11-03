@@ -24,6 +24,7 @@ Construir uma Agenda de Contatos completa, iniciando com uma solução procedura
 | v3.1.0 | Coleção de Objetos | Armazenamento de objetos `Contato` utilizando `List<Contato>` |
 | v3.2.0 | CRUD Orientado a Objetos | Adaptação das operações CRUD e da persistência para utilizar `List<Contato>` |
 | v3.3.0 | Encapsulamento | Encapsulamento e melhoria da modelagem da classe `Contato` |
+| **v4.0.0** | **DAO e Pacotes Java** | **Organização das classes em pacotes e centralização da persistência utilizando o padrão DAO** |
 
 ## Histórico de Versões
 
@@ -261,9 +262,38 @@ Principais características e conceitos:
 - Reconstrução dos objetos utilizando o construtor;
 - Eliminação do acesso direto aos atributos fora da classe `Contato`.
 
+### v4.0.0 — Introdução ao DAO e Organização em Pacotes
+
+Evolução da arquitetura da Agenda de Contatos por meio da organização das classes em pacotes Java e da introdução do padrão **DAO (Data Access Object)**.
+
+Até a versão anterior, as classes estavam organizadas em um único pacote, e as operações de persistência eram realizadas pela classe `Persistencia`.
+
+Nesta versão, as classes são distribuídas em pacotes conforme suas responsabilidades, e a classe `Persistencia` é substituída por `ContatoDAO`.
+
+O padrão DAO permite separar a lógica de acesso aos dados das demais funcionalidades da aplicação, facilitando a manutenção e futuras alterações na tecnologia de armazenamento.
+
+Principais características e conceitos:
+
+- Introdução ao conceito de pacotes Java;
+- Organização das classes conforme suas responsabilidades;
+- Criação dos pacotes `principal`, `modelo`, `servico`, `dao` e `uteis`;
+- Utilização das instruções `package` e `import`;
+- Introdução ao padrão DAO (Data Access Object);
+- Criação da classe `ContatoDAO`;
+- Centralização das operações de leitura e gravação;
+- Substituição da classe `Persistencia`;
+- Implementação dos métodos `carregarContatos()` e `salvarContatos()`;
+- Utilização de `List<Contato>` nas operações de persistência;
+- Integração do DAO com o fluxo de execução da aplicação;
+- Introdução ao princípio da responsabilidade única;
+- Redução da mistura de responsabilidades entre as classes;
+- Manutenção do formato de armazenamento `nome;celular;email`;
+- Preservação das funcionalidades existentes do CRUD;
+- Preparação da aplicação para futuras evoluções arquiteturais.
+
 ## Estrutura Atual
 
-A aplicação utiliza uma única coleção de objetos:
+A aplicação continua utilizando uma única coleção de objetos:
 
 ```java
 List<Contato> contatos = new ArrayList<>();
@@ -275,7 +305,7 @@ Cada contato é representado por uma instância da classe `Contato`:
 Contato contato = new Contato(nome, celular, email);
 ```
 
-A classe `Contato` é responsável pela representação e pelo acesso controlado aos seus dados:
+A classe `Contato` permanece responsável pela representação e pelo acesso controlado aos seus dados:
 
 ```java
 public class Contato {
@@ -316,30 +346,77 @@ public class Contato {
 }
 ```
 
-A estrutura principal da aplicação permanece:
+### Organização em Pacotes
+
+A estrutura do código-fonte passa a ser organizada da seguinte forma:
+
+```text
+src/
+└── br/
+    └── edu/
+        ├── principal/
+        │   └── Principal.java
+        ├── modelo/
+        │   └── Contato.java
+        ├── servico/
+        │   └── Agenda.java
+        ├── dao/
+        │   └── ContatoDAO.java
+        └── uteis/
+            └── Uteis.java
+```
+
+Cada classe possui uma responsabilidade específica:
+
+| Classe | Responsabilidade |
+|---|---|
+| `Principal` | Inicialização da aplicação e controle do fluxo de execução |
+| `Contato` | Representação e encapsulamento dos dados de um contato |
+| `Agenda` | Implementação das operações de gerenciamento dos contatos |
+| `ContatoDAO` | Leitura e gravação dos contatos em arquivo |
+| `Uteis` | Disponibilização de métodos auxiliares |
+
+### Organização das Responsabilidades
+
+A estrutura lógica da aplicação passa a ser:
 
 ```text
 Principal
-    │
-    └── List<Contato>
-            │
-            ├── Agenda
-            │     ├── adicionar()
-            │     ├── listar()
-            │     ├── pesquisar()
-            │     ├── atualizar()
-            │     └── excluir()
-            │
-            └── Persistencia
-                  ├── carregarContatos()
-                  └── salvarContatos()
+   │
+   └── List<Contato>
+           │
+           ├── Agenda
+           │     ├── adicionar()
+           │     ├── listar()
+           │     ├── pesquisar()
+           │     ├── atualizar()
+           │     └── excluir()
+           │
+           └── ContatoDAO
+                 ├── carregarContatos()
+                 └── salvarContatos()
 ```
 
-Os dados continuam sendo armazenados no arquivo `contatos.txt`:
+A classe `Agenda` continua responsável pelas operações do CRUD, enquanto `ContatoDAO` concentra o acesso aos dados armazenados em arquivo.
+
+### Persistência dos Dados
+
+Os contatos continuam sendo armazenados no arquivo `contatos.txt`, utilizando o formato:
 
 ```text
 nome;celular;email
 ```
+
+A classe `ContatoDAO` disponibiliza os métodos:
+
+```java
+ContatoDAO.carregarContatos(contatos);
+ContatoDAO.salvarContatos(contatos);
+```
+
+O primeiro método recupera os contatos armazenados no arquivo, enquanto o segundo grava os dados da coleção.
+
+Dessa forma, mantemos a persistência em arquivos e preparamos a aplicação para substituir futuramente o mecanismo de armazenamento.
 
 ## Tecnologias e Conceitos
 
@@ -356,17 +433,27 @@ nome;celular;email
 - `ArrayList`;
 - Java I/O;
 - Persistência em arquivo;
+- Pacotes Java;
+- Instruções `package` e `import`;
+- Padrão DAO (Data Access Object);
+- Separação de responsabilidades;
+- Refatoração de código;
+- Princípio da responsabilidade única;
 - Git;
 - GitHub.
 
 ## Versão Atual
 
-**v3.3.0 — Encapsulamento e Modelagem da Classe**
+**v4.0.0 — Introdução ao DAO e Organização em Pacotes**
 
-Nesta versão, concluímos a etapa inicial de fundamentos de Programação Orientada a Objetos, evoluindo desde a criação da classe `Contato` até o encapsulamento de seus atributos.
+Nesta versão, evoluímos a organização da Agenda de Contatos, distribuindo as classes em pacotes Java e centralizando as operações de persistência na classe `ContatoDAO`.
+
+Essa evolução representa o início da aplicação de padrões de projeto e princípios de organização arquitetural, mantendo os conceitos de Programação Orientada a Objetos já implementados.
 
 ## Próxima Evolução
 
-**V4 — Padrão DAO**
+**V4.1.0 — DAO Orientado a Objetos**
 
-A próxima etapa do projeto será dedicada à separação da lógica de acesso aos dados, preparando a aplicação para evoluções futuras nos mecanismos de persistência.
+A próxima etapa será dedicada ao aprimoramento da implementação do DAO, substituindo os métodos estáticos por métodos de instância, melhorando o encapsulamento e a organização das dependências entre as classes.
+
+Essa evolução preparará a aplicação para a introdução do padrão MVC nas próximas versões.
